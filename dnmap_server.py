@@ -46,14 +46,14 @@ try:
 	from twisted.python import log
 	from twisted.python.logfile import DailyLogFile
 except:
-	print 'You need twisted library. apt-get install python-twisted-bin python-twisted-core'
+	print('You need twisted library. apt-get install python-twisted-bin python-twisted-core')
 	exit(-1)
 
 import getopt, sys, time, os
 try:
 	from OpenSSL import SSL
 except:
-	print 'You need python openssl library. apt-get install python-openssl'
+	print('You need python openssl library. apt-get install python-openssl')
 	exit(-1)
 
 
@@ -87,7 +87,7 @@ delta = datetime.timedelta(seconds=5)
 last_show_time = temp - delta
 
 # defaults to 1 hour
-client_timeout = 3600 
+client_timeout = 3600
 
 sort_type = 'Status'
 
@@ -98,45 +98,44 @@ pemfile = 'server.pem'
 
 # Print version information and exit
 def version():
-  print "+----------------------------------------------------------------------+"
-  print "| dnmap_server Version "+ vernum +"                                             |"
-  print "| This program is free software; you can redistribute it and/or modify |"
-  print "| it under the terms of the GNU General Public License as published by |"
-  print "| the Free Software Foundation; either version 2 of the License, or    |"
-  print "| (at your option) any later version.                                  |"
-  print "|                                                                      |"
-  print "| Author: Garcia Sebastian, eldraco@gmail.com                          |"
-  print "| www.mateslab.com.ar                                                  |"
-  print "+----------------------------------------------------------------------+"
-  print
-
+  print( "+----------------------------------------------------------------------+")
+  print( "| dnmap_server Version "+ vernum +"                                    |")
+  print( "| This program is free software; you can redistribute it and/or modify |")
+  print( "| it under the terms of the GNU General Public License as published by |")
+  print( "| the Free Software Foundation; either version 2 of the License, or    |")
+  print( "| (at your option) any later version.                                  |")
+  print( "|                                                                      |")
+  print( "| Author: Garcia Sebastian, eldraco@gmail.com                          |")
+  print( "| www.mateslab.com.ar                                                  |")
+  print( "+----------------------------------------------------------------------+")
+  print()
 
 # Print help information and exit:
 def usage():
-  print "+----------------------------------------------------------------------+"
-  print "| dnmap_server Version "+ vernum +"                                             |"
-  print "| This program is free software; you can redistribute it and/or modify |"
-  print "| it under the terms of the GNU General Public License as published by |"
-  print "| the Free Software Foundation; either version 2 of the License, or    |"
-  print "| (at your option) any later version.                                  |"
-  print "|                                                                      |"
-  print "| Author: Garcia Sebastian, eldraco@gmail.com                          |"
-  print "| www.mateslab.com.ar                                                  |"
-  print "+----------------------------------------------------------------------+"
-  print "\nusage: %s <options>" % sys.argv[0]
-  print "options:"
-  print "  -f, --nmap-commands        Nmap commands file"
-  print "  -p, --port        TCP port where we listen for connections."
-  print "  -L, --log-file        Log file. Defaults to /var/log/dnmap_server.conf."
-  print "  -l, --log-level       Log level. Defaults to info."
-  print "  -v, --verbose_level         Verbose level. Give a number between 1 and 5. Defaults to 1. Level 0 means be quiet."
-  print "  -t, --client-timeout         How many time should we wait before marking a client Offline. We still remember its values just in case it cames back."
-  print "  -s, --sort         	Field to sort the statical value. You can choose from: Alias, #Commands, UpTime, RunCmdXMin, AvrCmdXMin, Status"
-  print "  -P, --pem-file         pem file to use for TLS connection. By default we use the server.pem file provided with the server in the current directory."
-  print
-  print "dnmap_server uses a \'<nmap-commands-file-name>.dnmaptrace\' file to know where it must continue reading the nmap commands file. If you want to start over again,"
-  print "just delete the \'<nmap-commands-file-name>.dnmaptrace\' file"
-  print
+  print ("+----------------------------------------------------------------------+")
+  print ("| dnmap_server Version "+ vernum +"                                             |")
+  print ("| This program is free software; you can redistribute it and/or modify |")
+  print ("| it under the terms of the GNU General Public License as published by |")
+  print ("| the Free Software Foundation; either version 2 of the License, or    |")
+  print ("| (at your option) any later version.                                  |")
+  print ("|                                                                      |")
+  print ("| Author: Garcia Sebastian, eldraco@gmail.com                          |")
+  print ("| www.mateslab.com.ar                                                  |")
+  print ("+----------------------------------------------------------------------+")
+  print ("\nusage: %s <options>" % sys.argv[0])
+  print ("options:")
+  print ("  -f, --nmap-commands        Nmap commands file")
+  print ("  -p, --port        TCP port where we listen for connections.")
+  print ("  -L, --log-file        Log file. Defaults to /var/log/dnmap_server.conf.")
+  print ("  -l, --log-level       Log level. Defaults to info.")
+  print ("  -v, --verbose_level         Verbose level. Give a number between 1 and 5. Defaults to 1. Level 0 means be quiet.")
+  print ("  -t, --client-timeout         How many time should we wait before marking a client Offline. We still remember its values just in case it cames back.")
+  print ("  -s, --sort         	Field to sort the statical value. You can choose from: Alias, #Commands, UpTime, RunCmdXMin, AvrCmdXMin, Status")
+  print ("  -P, --pem-file         pem file to use for TLS connection. By default we use the server.pem file provided with the server in the current directory.")
+  print()
+  print( "dnmap_server uses a \'<nmap-commands-file-name>.dnmaptrace\' file to know where it must continue reading the nmap commands file. If you want to start over again,")
+  print( "just delete the \'<nmap-commands-file-name>.dnmaptrace\' file")
+  print()
   sys.exit(1)
 
 
@@ -161,16 +160,16 @@ def timeout_idle_clients():
 		if verbose_level > 2:
 			msgline = 'Problem in mark_as_idle function'
 			mlog.error(msgline)
-			print msgline
+			print( msgline )
 			msgline = type(inst)
 			mlog.error(msgline)
-			print msgline
+			print(msgline)
 			msgline = inst.args
 			mlog.error(msgline)
-			print msgline
+			print(msgline)
 			msgline = inst
 			mlog.error(msgline)
-			print msgline
+			print(msgline)
 
 
 
@@ -198,7 +197,7 @@ def read_file_and_fill_nmap_variable():
 			# We already have a trace file. We must be reading the same original file again after some running...
 			trace_file_descriptor.seek(0)
 			last_line = trace_file_descriptor.readline()
-			
+
 			# Search for the line stored in the trace file
 			# This allow us to CTRL-C the server and reload it again without having to worry about were where we reading commnds...
 			otherline = file_descriptor.readline()
@@ -232,7 +231,7 @@ def read_file_and_fill_nmap_variable():
 		line = file_descriptor.readline()
 		file_position = file_descriptor.tell()
 		lines_read += 1
-	
+
 
 	msgline = 'Command lines read: {0}'.format(lines_read)
 	mlog.debug(msgline)
@@ -249,16 +248,18 @@ class ServerContextFactory:
 	def getContext(self):
 		"""
 		Create an SSL context.
-		This is a sample implementation that loads a certificate from a file 
+		This is a sample implementation that loads a certificate from a file
 		called 'server.pem'.
 		The file server.pem was copied from apache!
 		"""
 		ctx = SSL.Context(SSL.SSLv23_METHOD)
+		#ctx = SSL.Context(SSL.SSLv23_METHOD)
 		try:
 			ctx.use_certificate_file(pemfile)
 			ctx.use_privatekey_file(pemfile)
-		except:
-			print 'You need to have a server.pem file for the server to work. If it is not in your same directory, just point to it with -P parameter'
+		except Exception as e:
+			print(e)
+			print('You need to have a server.pem file for the server to work. If it is not in your same directory, just point to it with -P parameter')
 		return ctx
 
 
@@ -282,20 +283,20 @@ def show_info():
 
 		if verbose_level > 0:
 			line = '=| MET:{0} | Amount of Online clients: {1} |='.format(diff_time, amount)
-			print line
+			print(line)
 			mlog.info(line)
 
 		if clients != {}:
 			if verbose_level > 1:
 				line = 'Clients connected'
-				print line
+				print(line)
 				mlog.info(line)
 				line = '-----------------'
-				print line
+				print(line)
 				mlog.info(line)
 				#line = 'Alias\t#Commands\tLast Time Seen\t\t\tVersion\tIsRoot\tStatus'
 				line = '{0:15}\t{1}\t{2}\t{3}\t{4}\t\t{5}\t{6}\t{7}\t{8}\t{9}'.format('Alias','#Commands','Last Time Seen', '(time ago)', 'UpTime', 'Version', 'IsRoot', 'RunCmdXMin', 'AvrCmdXMin', 'Status')
-				print line
+				print(line)
 				mlog.info(line)
 				for i in clients:
 					if clients[i]['Status'] != 'Offline':
@@ -321,7 +322,7 @@ def show_info():
 						uptime_diff_mins = int( ((uptime_diff.seconds % 3600) + (uptime_diff.microseconds / 1000000.0)) / 60)
 
 						line = '{0:15}\t{1}\t\t{2}({3:2d}\'{4:2d}\")\t{5:2d}h{6:2d}m\t\t{7}\t{8}\t{9:10.1f}\t{10:9.1f}\t{11}'.format(clients[i]['Alias'], clients[i]['NbrCommands'], lasttime, time_diff_mins, time_diff_secs, uptime_diff_hours, uptime_diff_mins , clients[i]['Version'], clients[i]['IsRoot'], clients[i]['RunCmdsxMin'], clients[i]['AvrCmdsxMin'], clients[i]['Status'])
-						print line
+						print(line)
 						mlog.info(line)
 
 			print
@@ -331,17 +332,17 @@ def show_info():
 		if verbose_level > 2:
 			msgline = 'Problem in show_info function'
 			mlog.error(msgline)
-			print msgline
+			print(msgline)
 			msgline = type(inst)
 			mlog.error(msgline)
-			print msgline
+			print(msgline)
 			msgline = inst.args
 			mlog.error(msgline)
-			print msgline
+			print(msgline)
 			msgline = inst
 			mlog.error(msgline)
-			print msgline
-	
+			print(msgline)
+
 
 
 def send_one_more_command(ourtransport,client_id):
@@ -359,12 +360,12 @@ def send_one_more_command(ourtransport,client_id):
 		line = 'Data sent to client ID '+client_id+' ('+alias+')'
 		log.msg(line, logLevel=logging.INFO)
 		if verbose_level > 2:
-			print line
+			print(line)
 		line= '\t'+command_to_send.strip('\n')
 		log.msg(line, logLevel=logging.INFO)
 		if verbose_level > 2:
-			print line
-		ourtransport.transport.write(command_to_send)
+			print(line)
+		ourtransport.transport.write(command_to_send.encode("utf8"))
 		clients[client_id]['NbrCommands'] += 1
 		clients[client_id]['LastCommand'] = command_to_send
 		clients[client_id]['Status'] = 'Executing'
@@ -374,17 +375,17 @@ def send_one_more_command(ourtransport,client_id):
 		line = 'No more commands in queue.'
 		log.msg(line, logLevel=logging.DEBUG)
 		if verbose_level > 2:
-			print line
+			print(line)
 		line = '\tMaking the client '+str(client_id)+' ('+str(alias)+')'+' wait 10 secs for new commands to arrive...'
 		log.msg(line, logLevel=logging.DEBUG)
 		if verbose_level > 2:
-			print line
-		ourtransport.transport.write('Wait:10')
+			print(line)
+		ourtransport.transport.write('Wait:10'.encode("utf8"))
 	except Exception as inst:
-		print 'Problem in Send More Commands'
-		print type(inst)
-		print inst.args
-		print inst
+		print( 'Problem in Send More Commands')
+		print( type(inst))
+		print( inst.args)
+		print( inst)
 
 
 
@@ -436,11 +437,11 @@ def process_input_line(data,ourtransport,client_id):
 			msgline = 'Client ID connected: {0} ({1})'.format(str(client_id),str(alias))
 			log.msg(msgline, logLevel=logging.INFO)
 			if verbose_level > 1:
-				print '+ '+msgline
+				print('+ '+msgline)
 
 		elif 'Send more commands' in data:
 			alias = clients[client_id]['Alias']
-			
+
 			clients[client_id]['Status'] = 'Online'
 			#nowtime = datetime.datetime.now().ctime()
 			nowtime = datetime.datetime.now()
@@ -471,7 +472,7 @@ def process_input_line(data,ourtransport,client_id):
 			#commandsXsec = ( time_since_cmd_start.total_seconds() + (clients[client_id]['NbrCommands'] * prev_ca) ) / ( clients[client_id]['NbrCommands'] + 1 )
 			#clients[client_id]['RunCmdsxMin'] =  cmds_per_min = 60 / time_since_cmd_start.total_seconds()
 			clients[client_id]['RunCmdsxMin'] =  60 / ( time_since_cmd_start.seconds + ( time_since_cmd_start.microseconds / 1000000.0))
-			
+
 			clients[client_id]['AvrCmdsxMin'] = ( clients[client_id]['RunCmdsxMin'] + (clients[client_id]['NbrCommands'] * prev_ca) ) / ( clients[client_id]['NbrCommands'] + 1 )
 
 			# update the lasttime
@@ -483,7 +484,7 @@ def process_input_line(data,ourtransport,client_id):
 			os.system('mkdir nmap_results > /dev/null 2>&1')
 
 			# Get the output file from the data
-			# We strip \n. 
+			# We strip \n.
 			nmap_output_file = 'nmap_results/'+data.split(':')[1].strip('\n')+'.nmap'
 			if verbose_level > 2:
 				log.msg('\tNmap output file is: {0}'.format(nmap_output_file), logLevel=logging.DEBUG)
@@ -508,7 +509,7 @@ def process_input_line(data,ourtransport,client_id):
 			output_file_descriptor.writelines(data+'\n')
 			output_file_descriptor.flush()
 
-				
+
 		elif 'Nmap Output Finished' in data and nmap_output_coming_back:
 			# Nmap output finished
 			nmap_output_coming_back = False
@@ -519,7 +520,7 @@ def process_input_line(data,ourtransport,client_id):
 			#nowtime = datetime.datetime.now().ctime()
 			nowtime = datetime.datetime.now()
 			clients[client_id]['LastTime'] = nowtime
-		
+
 			# Store the finished nmap command in the file, so we can retrieve it if we need...
 			finished_nmap_command = clients[client_id]['LastCommand']
 			trace_file_descriptor = open(trace_file, 'w')
@@ -529,15 +530,15 @@ def process_input_line(data,ourtransport,client_id):
 			trace_file_descriptor.close()
 
 			if verbose_level > 2:
-				print '+ Storing command {0} in trace file.'.format(finished_nmap_command.strip('\n').strip('\r'))
+				print('+ Storing command {0} in trace file.'.format(finished_nmap_command.strip('\n').strip('\r')))
 
 			output_file_descriptor.close()
 
 	except Exception as inst:
-		print 'Problem in process input lines'
-		print type(inst)
-		print inst.args
-		print inst
+		print( 'Problem in process input lines')
+		print( type(inst))
+		print( inst.args)
+		print( inst)
 
 
 
@@ -567,20 +568,19 @@ class NmapServerProtocol(Protocol):
 			msgline = 'Connection lost in the protocol. Reason:{0}'.format(reason)
 			msgline2 = '+ Connection lost for {0} ({1}).'.format(alias, client_id)
 			log.msg(msgline, logLevel=logging.DEBUG)
-			print msgline2
-
+			print(msgline2)
 			clients[client_id]['Status'] = 'Offline'
 			command_to_redo = clients[client_id]['LastCommand']
 			if command_to_redo != '':
 				nmap_command.append(command_to_redo)
 			if verbose_level > 2:
-				print 'Re inserting command: {0}'.format(command_to_redo)
+				print('Re inserting command: {0}'.format(command_to_redo))
 
 
 	def dataReceived(self, newdata):
 		#global client_id
-
-		data = newdata.strip('\r').strip('\n').split('\r\n')
+		print(newdata)
+		data = str(newdata).strip('\r').strip('\n').split('\r\n')
 
 		peerHost = self.transport.getPeer().host
 		peerPort = str(self.transport.getPeer().port)
@@ -590,7 +590,7 @@ class NmapServerProtocol(Protocol):
 		if verbose_level > 2:
 			log.msg('Data recived', logLevel=logging.DEBUG)
 			log.msg(data, logLevel=logging.DEBUG)
-			print '+ Data received: {0}'.format(data)
+			print('+ Data received: {0}'.format(data))
 
 		for line in data:
 			process_input_line(line,self,client_id)
@@ -668,7 +668,7 @@ def main():
 		try:
 			temp = os.stat(pemfile)
 		except OSError:
-			print 'No pem file given. Use -P'
+			print('No pem file given. Use -P')
 			exit(-1)
 
 
@@ -709,7 +709,7 @@ def main():
 
 	except KeyboardInterrupt:
 		# CTRL-C pretty handling.
-		print "Keyboard Interruption!. Exiting."
+		prin("Keyboard Interruption!. Exiting.")
 		sys.exit(1)
 
 
